@@ -1,2 +1,60 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
 
+body {
+    background-color: rgb(106, 174, 150);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
   
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: crimson;
+    font-size: 4em;
+    display:flex;
+    justify-content: center;
+}
+
+#time-text {
+   font-size: 2em;
+   color: blue;
+   position: relative;
+   margin-left: 54em;
+   margin-top: 2em;
+}
+
+#time-counter {
+    position: absolute;
+    font-size: 2em;
+    display: inline;
+    margin-left: 55em;
+   
+}
+
+#start-button {
+    font-size: 1.5em;
+    margin-left: 38em;
+    background-color: silver;
+    border-radius: 1em;
+    padding: .3em;
+}
+
+#start-button:active {
+    background-color: rgb(58, 58, 197);
+
+}
+
+#questions {
+    margin-left: 20em;
+}
+
+h4 {
+   font-size: 1.5em;
+   display: flex;
+   justify-content: flex-start ;
+   
+    
+}
+
+#high-score
