@@ -11,7 +11,7 @@ N/A
 
 Navigate to "" and click the Start button to begin. 
 
-![picture of quiz]()
+![picture of quiz](assets/Quiz.jpeg)
 
 ## Usage
 User can use the app to help test their knowledge on some basic coding information. 
