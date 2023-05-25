@@ -8,32 +8,41 @@
     <title>Coding Quiz</title>
 </head>
 <body>
-    <h1 class="quiz">Coding Quiz</h1>
+    <header>
+        <h1 class="quiz">Coding Quiz</h1>
+        <div id="time-text">Time:</div>
+        <div id="time-counter">120</div>
+        <div>
+            <"><button id="high-score-btn">High Score</button></a>
+        </div>
+        </header>
+    
     <div>
         <button id="start-button">Start</button>
     </div>
-    <div id="time-text">Time:</div>
-    <div id="time-counter">180</div>
-    
-    <P id="questions">
-        <button id="choice-a">A.</button>
-        <button id="choice-b">B.</button>
-        <button id="choice-c">C.</button>
-        <button id="choice-d">D.</button>
-    </P>
     <div>
-        <h4>Final Score</h4>
-        <div>
-            <button id="high-score">High Score</button>
-        </div>
-        
-       <form>
-        <p>
-            <button type="submit" id="initials">Submit</button>
-        </form>
+        <p id="info">Are you ready to test your coding knowledge? Just hit the Start button to begin!<br> Any wrong answers will lead to 15 seconds being shaved off the clock so proceed with care but have fun!</p>
+    </div>
+    <div id="questions"></div>
+    <section id="choices">
+        <P><button id="choice-a" class="btn"></button></P>
+        <p><button id="choice-b"class="btn" ></button></p>
+        <p><button id="choice-c" class="btn"></button></p>
+        <p><button id="choice-d" class="btn"></button></p>
+        <p id="check-answer"></p>
+    </section>
+      
+    <div>
+    <h2 id="end-text">Your end score is: <span id="end-score"></span></h2> 
+    <form id="player-info">
+        <p>Enter your initials: <input id="player-intls" class="form-control" type="text">
+        <button type="submit" id="submitInitialBtn" class="btn btn-info mt-2">Submit</button>
         </p>
+    </form>
 
     </div>
+
+    <div id="score-list" class="list-group"></div>
     
     <script src="assets\script.js"></script>
 </body>

@@ -5,42 +5,22 @@ var choiceA = document.getElementById("choice-a");
 var choiceB = document.getElementById("choice-b");
 var choiceC = document.getElementById("choice-c");
 var choiceD = document.getElementById("choice-d");
+var endScore = document.getElementById("end-score");
+var playerInfo = document.getElementById("player-info");
+var playerInitials = document.getElementById("player-intls");
+var initialBtn = document.getElementById("submitInitialBtn")
+var scoreList = document.getElementById("score-list");
+var choices = document.getElementById("choices");
+var determineAnswer = document.getElementById("check-answer");
+var endText = document.getElementById("end-text");
+var highScorebtn = document.getElementById("high-score-btn");
+var info = document.getElementById("info");
 
 var questionIndex = 0;
 var rightAnswers = 0;
 var scoreTotal;
 var questionNum = 0;
-
-
-
-//create a timer using the startTime variable
 var startTime = 180;
-function setTimer(){
-    timerInterval = setInterval(function() {
-       startTime--;
-       timeGone.textContent = startTime;
-     
-       if (startTime === 0){
-         clearInterval(timerInterval);
-
-         if (questionsIndex <questions.length -1){
-            endGame();
-         }
-
-          
-       }
-
-   }, 1000);
-}
-
-
-
-
-
-startbtn.addEventListener("click", function()
-{
-setTimer()
-});
 
 // Questions for quiz
 var questions = [
@@ -57,7 +37,7 @@ var questions = [
     {
      question: "Inside what HTML element does the JavaScript go in?",
      possibleAnswers: ["a. <javascript>", "b. <js>", "c. <style>", "d. <script>"],
-     correctAnswer: "<d. <script>",
+     correctAnswer: "d. <script>",
     },
 
     {
@@ -106,7 +86,7 @@ var questions = [
 
     {
      question: "In DOM, all the properties, methods, and events that are available to a web developer for manipulating and creating web pages are organized into:",
-     possibleAnswers:["Tables", "Objects", "Classes", "Modules"], 
+     possibleAnswers:["a. Tables", "b. Objects", "c. Classes", "d. Modules"], 
      correctAnswer: "b. Objects",
    
     },
@@ -117,7 +97,42 @@ var questions = [
      correctAnswer:  "d. Declaration statements", 
    
     },
-]
+];
+
+
+
+
+//create a timer using the startTime variable
+function setQuiz(){
+    questionIndex = 0;
+    startTime = 120;
+    playerInitials.textContent = "";
+   
+    startbtn.setAttribute('style', 'display:none');
+    endScore.setAttribute('style', 'visibility:hidden');
+    quizQuestions.setAttribute('style', 'display:block');
+    choices.setAttribute('style', 'visibility:visible');
+    info.setAttribute('style', 'display:none');
+   
+
+    timerInterval = setInterval(function() {
+       startTime--;
+       timeGone.textContent = startTime;
+     
+       if (startTime === 0){
+         clearInterval(timerInterval);
+
+         if (questionIndex < questions.length -1){
+            endGame();
+         }
+
+          
+       }
+
+   }, 1000);
+
+   startQuiz();
+};
 
 function startQuiz() {
     rotateQuestions();
@@ -127,14 +142,128 @@ function rotateQuestions(){
     quizQuestions.textContent = questions[questionIndex].question;
     choiceA.textContent = questions[questionIndex].possibleAnswers[0];
     choiceB.textContent = questions[questionIndex].possibleAnswers[1];
-    choiceC.textContent = questions[questionIndex].possibleAnswer[2];
-    choiceD.textContent = questions[questionIndex].possibleAnswer[3];
+    choiceC.textContent = questions[questionIndex].possibleAnswers[2];
+    choiceD.textContent = questions[questionIndex].possibleAnswers[3];
 }
+
+/*function created to check if picked answer is correct, send alert to player telling if they 
+got question right*/
 
 function checkAnswer (correctAnswer) {
     if (questions[questionIndex].correctAnswer === questions[questionIndex].possibleAnswers[correctAnswer]){
         rightAnswers++;
-
-
+        determineAnswer.textContent = "Correct";
+      
     }
-}
+    //subtracts time if wrong answer and alerts user that question is wrong
+    else{
+        startTime -=15;
+        timeGone.textContent = startTime;
+        determineAnswer.textContent = "Incorrect. The answer is" + questions[questionIndex].correctAnswer;
+    }
+    //goes through questions until all answered and then ends game
+    questionIndex++;
+
+
+    if (questionIndex<questions.length){
+        rotateQuestions();
+    } else {
+            endGame();
+        }
+    }
+    
+    // function to check if answer is correct based upon button pushed
+    function pickA() {checkAnswer(0)};
+    function pickB() {checkAnswer(1)};
+    function pickC() {checkAnswer(2)};
+    function pickD() {checkAnswer(3)};
+
+    function endGame() {
+        quizQuestions.setAttribute('style', 'display:none');
+        choices.setAttribute('style', 'display:none');
+        endScore.setAttribute('style', 'display:block');
+        endText.setAttribute('style', 'visibility:visible');
+        playerInfo.setAttribute('style', 'visibility:visible');
+        endScore.textContent = rightAnswers;
+       
+       
+    }
+    // function to save the high scores
+    function highScoreEntry (event) {
+        event.preventDefault();
+    
+
+    if (playerInitials.value === ""){
+        alert("Please enter your initials."); 
+        return;
+    }
+
+    var savedScores = localStorage.getItem("high Scores");
+    var scoresArr;
+
+   if (savedScores === null) {
+    scoresArr = [];
+   } else {
+    scoresArr = JSON.parse(savedScores)
+   }
+
+   var playerScore = {
+    PInitials: playerInitials.value,
+    score: endScore.textContent
+   };
+
+   scoresArr.push(playerScore);
+
+   var scoreArrString = JSON.stringify(scoresArr);
+   window.localStorage.setItem("high Scores", scoreArrString);
+
+   /*viewHighScores();
+    }
+
+    // function to append a paragragh element with each new high score entry
+   var i = 0;
+   function viewHighScores(){
+    
+    var savedScores = localStorage.getItem("High Scores");
+
+    if (savedScores === null){
+        return;
+    }
+
+    var storedScores = JSON.parse(savedScores);
+
+    for (i; i < storedScores.length; i++) {
+        var eachScore = document.createElement("p");
+        eachScore.innerHTML = savedScores[i].Pinitials + ": " + savedScores[i].score;
+        scoreList.appendChild(eachScore);
+    
+    }*/
+
+   }
+
+
+   
+
+
+    //event listener added to pick answer
+    startbtn.addEventListener("click", setQuiz )
+    choiceA.addEventListener("click", pickA);
+    choiceB.addEventListener("click", pickB);
+    choiceC.addEventListener("click", pickC);
+    choiceD.addEventListener("click", pickD);
+    
+    //event listener to start highScoreEntry event
+    initialBtn.addEventListener("click", function(event){
+        highScoreEntry(event);
+    });
+
+    /*event listener to start the view high scores entry event
+    highScorebtn.addEventListener("click", function(event){
+        viewHighScores(event);
+    });*/
+
+
+    
+    
+    
+  
