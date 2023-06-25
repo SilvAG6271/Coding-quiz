@@ -9,7 +9,9 @@ N/A
 
 ## Installation 
 
-Navigate to "" and click the Start button to begin.
+Navigate to <https://silvag6271.github.io/Quiz/> and click the Start button to begin. 
+
+![picture of quiz](assets/Quiz.jpeg)
 
 ## Usage
 User can use the app to help test their knowledge on some basic coding information. 
