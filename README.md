@@ -11,7 +11,8 @@ N/A
 
 Navigate to <https://silvag6271.github.io/Quiz/> and click the Start button to begin. 
 
-![picture of quiz](assets/Quiz.jpeg)
+![picture of quiz](assets/Quiz-1.jpeg)
+![picture of high score page](assets/Quiz-2.jpeg)
 
 ## Usage
 User can use the app to help test their knowledge on some basic coding information. 
