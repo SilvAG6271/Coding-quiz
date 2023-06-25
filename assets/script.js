@@ -1,3 +1,4 @@
+//variables created to be used
 var startbtn = document.getElementById("start-button");
 var timeGone = document.getElementById("time-counter");
 var quizQuestions = document.getElementById("questions")
@@ -99,7 +100,7 @@ var questions = [
     },
 ];
 
-
+//function to reset quiz to initial state
 function resetQuiz() {
     questionIndex = 0;
     rightAnswers = 0;
@@ -119,14 +120,6 @@ function resetQuiz() {
          clearInterval(timerInterval);
          timeGone.textContent = startTime;
 }
-
-         
-
-          
-    
-         
-
-
 
 //create a timer using the startTime variable
 function setQuiz(){
@@ -163,7 +156,7 @@ function setQuiz(){
 function startQuiz() {
     rotateQuestions();
 }
-
+//function to rotate through questions 
 function rotateQuestions(){
     quizQuestions.textContent = questions[questionIndex].question;
     choiceA.textContent = questions[questionIndex].possibleAnswers[0];
@@ -217,9 +210,6 @@ function checkAnswer (correctAnswer) {
         endText.setAttribute('style', 'visibility:visible');
         playerInfo.setAttribute('style', 'visibility:visible');
         endScore.textContent = rightAnswers;
-        
-       
-       
     }
    
    
@@ -255,31 +245,9 @@ function checkAnswer (correctAnswer) {
    var scoreArrString = JSON.stringify(scoresArr);
    window.localStorage.setItem("high scores", scoreArrString);
 
-  // viewHighScores();
+  
      }
-
-    // function to append a paragragh element with each new high score entry
-   
-    //  function viewHighScores(){
-    
-    //   var savedScores = localStorage.getItem("high scores");
-    
-
-    //  if (savedScores === null){
-    //      return;
-    //   }
-
-    //  var storedScores = JSON.parse(savedScores);
-
-    //   for (i = 0; i < storedScores.length; i++) {
-    //       var eachScore = document.createElement("p");
-    //       eachScore.innerHTML = storedScores[i].Initials + ": " + storedScores[i].score;
-    //       scoreList.appendChild(eachScore);
-    
-    //  }
-
-    // }
-
+    //function to push info to high score page so list of initials will show up there
     function pageTwo(){
         var savedScores = localStorage.getItem("high scores");
         var scoresArr = savedScores ? JSON.parse(savedScores) : [];
@@ -288,11 +256,7 @@ function checkAnswer (correctAnswer) {
         window.location.href = "highscores.html";
     }
 
-
-   
-
-
-    //event listener added to pick answer
+   //event listener added to pick answer
     startbtn.addEventListener("click", setQuiz )
     choiceA.addEventListener("click", pickA);
     choiceB.addEventListener("click", pickB);
