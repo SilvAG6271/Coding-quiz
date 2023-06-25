@@ -4,19 +4,25 @@
 }
 
 body {
-    background-color: rgb(118, 92, 132);
+    /* background-color: rgb(118, 92, 132); */
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-image: url("./images/quiz-background.jpg");
 }
 
-header {
+/* header {
     background-color: blaCK;
-    
-   
-}
+} */
+
 #high-score-btn{
-    float:right;
-    padding: .5em;
-    border-radius: .5em;
+    position: relative;
+    float: right;
+    border: .2rem;
+    border-style:double;
+    padding: .3rem;
+    margin-right: .5dvw;
+    border-radius: .5rem;
+    background-color:silver;
+    
 }
 
 #high-score-btn:hover {
@@ -24,7 +30,26 @@ header {
 }
 
 #high-score-btn:active {
-    background-color: blue;
+    background-color: blue; 
+}
+
+@keyframes wave {
+
+    50% {
+        border-radius: 0 1rem 0 1rem;
+    }
+
+    100% {
+        border-radius: 1rem 0 1rem 0;
+    }
+
+}
+
+#high-score-btn:hover{
+
+    animation: wave 4s ease-in-out infinite;
+
+
 }
 
     #time-text {
@@ -54,12 +79,47 @@ h1 {
 
 
 #start-button {
+    position: relative;
     font-size: 1.5em;
     margin-left: 48dvw;
+    border: .5rem;
+    border-style:double;
+    padding: .8rem;
+    margin-right: .5dvw;
+    border-radius: 2rem;
     background-color: silver;
-    border-radius: 1em;
-    padding: 1em;
-    margin-top: 5dvh;
+   --accent-color:blue;
+  
+}
+
+#start-button::before{
+    content:'';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--accent-color) ;
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+    transform-origin: right;
+    position: absolute;
+    z-index: -1;
+    border-radius: 2rem;
+}
+
+#start-button{
+    z-index: 1;
+}
+
+#start-button:hover::before,
+#start-button:focus::before{
+    transform: scaleX(1);
+    
+}
+
+#start-button:hover,
+#start-button:focus{
+    color: white;
 }
 
 #start-button:hover {
@@ -68,8 +128,7 @@ h1 {
 
 
 #start-button:active {
-  background-color: blue;
-   
+  border-color: crimson; 
   }
 
 #info {
@@ -123,27 +182,5 @@ h4 {
 
 
 #choices .btn:active {
-    background-color: blue;
-}
-
-#score-page {
-    background-color:rgb(118, 92, 132);
-}
-
-#high-score-body {
-    background-color: wheat;
-}
-
-
-#back-btn {
-    padding: .5em;
-    border-radius: .5em;
-}
-
-#back-btn:hover {
-    transform: scale(1.1);
-}
-
-#back-btn:active {
-    background-color: blue;
+    background-color: rgb(25, 131, 223);
 }

@@ -1,0 +1,97 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    /* background-color: black; */
+    background-image: url("./hs-images/high-score-page.jpg");
+    background-repeat: no-repeat;
+   
+}
+
+
+h1{
+    color: aliceblue;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#score-list{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: bisque;
+    background-color:black;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 10dvh;
+}
+
+#high-scores-list{
+    list-style-type: decimal;
+}
+
+#back-btn{
+   float: left;
+   
+}
+
+#clear{
+    display: flex;
+    justify-content: center;
+    margin:2rem;
+}
+
+#back-btn, #clear-btn{
+    border: .2rem;
+    border-style:double;
+    padding: .3rem;
+    margin-left: .5dvw;
+    border-radius: .5rem;
+    background-color: silver;
+}
+ #clear-btn:hover{
+    transform: scale(1.1);
+}
+
+#back-btn:hover{
+    transform: scale(1.1);
+}
+
+@keyframes wave {
+
+    50% {
+        border-radius: 0 1rem 0 1rem;
+    }
+
+    100% {
+        border-radius: 1rem 0 1rem 0;
+    }
+
+}
+
+#back-btn:hover{
+
+    animation: wave 4s ease-in-out infinite;
+
+
+}
+
+#clear-btn:hover{
+    animation: wave 4s ease-in-out infinite;
+}
+
+#back-btn:active{
+    background-color: greenyellow ;
+}
+
+#clear-btn:active{
+    background-color: greenyellow ;
+}

@@ -30,28 +30,28 @@ var questions = [
      "b. var = ['calico', 'siamese', 'maine coon', 'persian']", 
      "c. var = calico, siamese, maine coon, persian",
      "d. var = 1 = calico, 2 = siamese, 3 = maine coon, 4 = persian"],
-     correctAnswer: "b. var = ['calico', 'siamese', 'maine coon', 'persian']",
+     correctAnswer: " b. var = ['calico', 'siamese', 'maine coon', 'persian']",
 
     },
 
     {
      question: "Inside what HTML element does the JavaScript go in?",
      possibleAnswers: ["a. <javascript>", "b. <js>", "c. <style>", "d. <script>"],
-     correctAnswer: "d. <script>",
+     correctAnswer: " d. <script>",
     },
 
     {
      question: "What does HTML stand for?",
      possibleAnswers: ["a. Hyperlinks Text Markup Language", "b. Home Tool Markup Language",
      "c. Hyper Text Markup Language", "d. Home Text Marker LAnguage"],
-     correctAnswer: "c. Hyper Text Markup Language",
+     correctAnswer: " c. Hyper Text Markup Language",
    
     },
 
     {
      question: "Choose the correct HTML element for the largest heading",
      possibleAnswers: ["a. <h1>","b. <head>", "c. <heading>", "d. <h4>"],
-     correctAnswer: "a. <h1>",
+     correctAnswer: " a. <h1>",
    
     },
 
@@ -59,46 +59,72 @@ var questions = [
      question: "What does DOM stand for?",
      possibleAnswers: ["a. Document Object Model", "b. Document Objective Model", 
      "c. Document Object Module", "d. Dogs Obey Mermaids"],
-     correctAnswer: "a. Document Object Model",
+     correctAnswer: " a. Document Object Model",
    
     },
 
     {
      question: "Which type of CSS holds the highest priority?",
      possibleAnswers: ["a. Inline", "b. External", "c. Internal", "d. All have equal priority"],
-     correctAnswer: "a. Inline",
+     correctAnswer: " a. Inline",
    
     },
 
     {
      question: "How do we add comments in CSS?",
      possibleAnswers: ["a. //comment", "b. <!comment>", "c. /*comment*/", "d. <comment/>"],
-     correctAnswer:"c. /*comment*/",
+     correctAnswer:" c. /*comment*/",
    
     },
 
     {
      question: "Which one of these is a positioning property of CSS?",
      possibleAnswers: ["a. Sticky", "b. Stationary", "c. Relational", "d. Fixated"],
-     correctAnswer: "a. Sticky",
+     correctAnswer: " a. Sticky",
    
     },
 
     {
      question: "In DOM, all the properties, methods, and events that are available to a web developer for manipulating and creating web pages are organized into:",
      possibleAnswers:["a. Tables", "b. Objects", "c. Classes", "d. Modules"], 
-     correctAnswer: "b. Objects",
+     correctAnswer: " b. Objects",
    
     },
 
     {
      question: "The 'function' and 'var' are known as:",
      possibleAnswers: ["a. Data types", "b. Keywords", "c. Elementals", "d. Declaration statements"],
-     correctAnswer:  "d. Declaration statements", 
+     correctAnswer:  " d. Declaration statements", 
    
     },
 ];
 
+
+function resetQuiz() {
+    questionIndex = 0;
+    rightAnswers = 0;
+    startTime = 120;
+    playerInitials.textContent = "";
+   
+    startbtn.setAttribute('style', 'display:block');
+    endScore.setAttribute('style', 'visibility:hidden');
+    quizQuestions.setAttribute('style', 'display:none');
+    choices.setAttribute('style', 'visibility:hidden');
+    info.setAttribute('style', 'display:block');
+    endText.setAttribute('style', 'visiblity:hidden');
+    playerInfo.setAttribute('style', 'visibility:hidden');
+   
+
+    
+         clearInterval(timerInterval);
+         timeGone.textContent = startTime;
+}
+
+         
+
+          
+    
+         
 
 
 
@@ -144,8 +170,13 @@ function rotateQuestions(){
     choiceB.textContent = questions[questionIndex].possibleAnswers[1];
     choiceC.textContent = questions[questionIndex].possibleAnswers[2];
     choiceD.textContent = questions[questionIndex].possibleAnswers[3];
+    quizQuestions.setAttribute('style', 'color:white');
+
+if (questionIndex === questions.length - 1) {
+    clearInterval(timerInterval);
 }
 
+}
 /*function created to check if picked answer is correct, send alert to player telling if they 
 got question right*/
 
@@ -153,13 +184,14 @@ function checkAnswer (correctAnswer) {
     if (questions[questionIndex].correctAnswer === questions[questionIndex].possibleAnswers[correctAnswer]){
         rightAnswers++;
         determineAnswer.textContent = "Correct";
-      
+        determineAnswer.setAttribute('style', 'color:white');
     }
     //subtracts time if wrong answer and alerts user that question is wrong
     else{
         startTime -=15;
         timeGone.textContent = startTime;
         determineAnswer.textContent = "Incorrect. The answer is" + questions[questionIndex].correctAnswer;
+        determineAnswer.setAttribute('style', 'color:white');
     }
     //goes through questions until all answered and then ends game
     questionIndex++;
@@ -185,61 +217,76 @@ function checkAnswer (correctAnswer) {
         endText.setAttribute('style', 'visibility:visible');
         playerInfo.setAttribute('style', 'visibility:visible');
         endScore.textContent = rightAnswers;
+        
        
        
     }
-    // function to save the high scores
-    function highScoreEntry (event) {
+   
+   
+    
+   // function to save the high scores
+   function highScoreEntry (event) {
         event.preventDefault();
     
 
-    if (playerInitials.value === ""){
+     if (playerInitials.value === ""){
         alert("Please enter your initials."); 
         return;
-    }
+     }
+    //cpnvert player input to uppercase
+     var initials = playerInitials.value.toUpperCase();
+     //get high scores info from local storage
+     var savedScores = localStorage.getItem("high scores");
+     var scoresArr;
 
-    var savedScores = localStorage.getItem("high Scores");
-    var scoresArr;
-
-   if (savedScores === null) {
-    scoresArr = [];
-   } else {
-    scoresArr = JSON.parse(savedScores)
+    if (savedScores === null) {
+     scoresArr = [];
+    } else {
+     scoresArr = JSON.parse(savedScores)
    }
-
+   //create object where the names are initials and score
    var playerScore = {
-    PInitials: playerInitials.value,
-    score: endScore.textContent
-   };
+     Initials: initials,
+     score: endScore.textContent
+    };
 
    scoresArr.push(playerScore);
 
    var scoreArrString = JSON.stringify(scoresArr);
-   window.localStorage.setItem("high Scores", scoreArrString);
+   window.localStorage.setItem("high scores", scoreArrString);
 
-   /*viewHighScores();
-    }
+  // viewHighScores();
+     }
 
     // function to append a paragragh element with each new high score entry
-   var i = 0;
-   function viewHighScores(){
+   
+    //  function viewHighScores(){
     
-    var savedScores = localStorage.getItem("High Scores");
+    //   var savedScores = localStorage.getItem("high scores");
+    
 
-    if (savedScores === null){
-        return;
+    //  if (savedScores === null){
+    //      return;
+    //   }
+
+    //  var storedScores = JSON.parse(savedScores);
+
+    //   for (i = 0; i < storedScores.length; i++) {
+    //       var eachScore = document.createElement("p");
+    //       eachScore.innerHTML = storedScores[i].Initials + ": " + storedScores[i].score;
+    //       scoreList.appendChild(eachScore);
+    
+    //  }
+
+    // }
+
+    function pageTwo(){
+        var savedScores = localStorage.getItem("high scores");
+        var scoresArr = savedScores ? JSON.parse(savedScores) : [];
+        sessionStorage.setItem("scores", JSON.stringify(scoresArr));
+
+        window.location.href = "highscores.html";
     }
-
-    var storedScores = JSON.parse(savedScores);
-
-    for (i; i < storedScores.length; i++) {
-        var eachScore = document.createElement("p");
-        eachScore.innerHTML = savedScores[i].Pinitials + ": " + savedScores[i].score;
-        scoreList.appendChild(eachScore);
-    
-    }*/
-
-   }
 
 
    
@@ -255,15 +302,13 @@ function checkAnswer (correctAnswer) {
     //event listener to start highScoreEntry event
     initialBtn.addEventListener("click", function(event){
         highScoreEntry(event);
+        resetQuiz();
     });
 
-    /*event listener to start the view high scores entry event
-    highScorebtn.addEventListener("click", function(event){
-        viewHighScores(event);
-    });*/
+    
 
+    //event listener to start the view high scores entry event
+    highScorebtn.addEventListener("click", pageTwo);
+      
 
-    
-    
-    
   
