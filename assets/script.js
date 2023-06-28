@@ -173,8 +173,12 @@ if (questionIndex === questions.length - 1) {
 /*function created to check if picked answer is correct, send alert to player telling if they 
 got question right*/
 
-function checkAnswer (correctAnswer) {
-    if (questions[questionIndex].correctAnswer === questions[questionIndex].possibleAnswers[correctAnswer]){
+function checkAnswer (correctAnswerIndex) {
+    var chosenAnswer = questions[questionIndex].possibleAnswers[correctAnswerIndex];
+    //removed leading space in correct answer so logic will not be found as false
+    var correctAnswer =  questions[questionIndex].correctAnswer.trim();
+
+    if (chosenAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
         rightAnswers++;
         determineAnswer.textContent = "Correct";
         determineAnswer.setAttribute('style', 'color:white');
